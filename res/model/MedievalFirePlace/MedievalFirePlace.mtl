@@ -1,0 +1,35 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.1.193236683)
+
+newmtl FirePlaceAshes
+kd 0.8 0.8 0.8
+illum 1
+
+newmtl FirePlaceLogs
+kd 0.8 0.8 0.8
+illum 1
+
+newmtl FirePlaceRack
+kd 0.8 0.8 0.8
+illum 1
+
+newmtl FirePlaceTopSection
+kd 0.8 0.8 0.8
+illum 1
+
+newmtl FirePlaceArches
+kd 0.8 0.8 0.8
+illum 1
+
+newmtl FirePlaceMiddleSection
+kd 0.8 0.8 0.8
+illum 1
+
+newmtl FirePlaceBottomSection
+kd 0.8 0.8 0.8
+illum 1
+
+newmtl FirePlaceLowerSection
+kd 0.8 0.8 0.8
+illum 1
+
