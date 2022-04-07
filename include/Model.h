@@ -4,6 +4,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "Light.h"
 
 class Model
 {
@@ -38,5 +39,6 @@ private:
 	void SetLightD(Shader* shader, LightDirection* lightD);
 	void SetLightP(Shader* shader, LightPoint* lightP);
 	void SetLightS(Shader* shader, LightSpot* lightS);
+	void SetTexture(Shader* shader);
 };
 

@@ -24,6 +24,9 @@ public:
 		m_radius = 0.2355;
 		m_rectWidth_Height[0] = 0.5;
 		m_rectWidth_Height[1] = 0.44;
+		ap = 1;
+		sen = 2;
+		shutterspeed = 3;
 	};
 	virtual ~UI() {};
 public:
@@ -55,6 +58,8 @@ public:
 	bool b_pointFlag = true;
 	bool b_spotFlag = false;
 	bool b_areaFlag = true;
+	bool b_Wireframe = false;
+	bool b_lam = false;
 	bool rotationEnabled = false;
 	bool wireframeEnabled = false;
 	bool lightEnabled = false;
@@ -72,5 +77,14 @@ public:
 	ImVec4 m_spotLColor;
 	ImVec4 m_areaColr;
 	float m_radius;
+	float m_fact;
 	float m_rectWidth_Height[2];
+	int ap;
+    int shutterspeed;
+    int sen;
+    float m_apterture = 1.4;
+    float m_shutterspeed = 1.0f / 30.0f;
+    float m_sensitivity = 25600.0f;
+    float m_innerLevel = 2.0f;
+    float m_outerLevel = 1.0f;
 };

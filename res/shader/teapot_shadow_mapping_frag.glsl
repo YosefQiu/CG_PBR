@@ -43,15 +43,15 @@ vec3 CalcLightD(LightDirection light, vec3 Normal, vec3 dirToCamera, Material ma
 {
 	//diffuse
 	float diffIntensity = max(dot(light.dirToLight, Normal), 0.0f);
-	vec3 diff = mat.Kd * texture(tex.diffuse, TexCoord).rgb * diffIntensity * light.color;
+	vec3 diff = texture(tex.diffuse, TexCoord).rgb * diffIntensity * light.color;
 
 	//specualr
 	vec3 halfDir = normalize(light.dirToLight + dirToCamera);
 	float specularIntensity = pow(max(dot(Normal, halfDir), 0.0f), mat.Ns);
-	vec3 spec = mat.Ks * texture(tex.specualr, TexCoord).rgb *  specularIntensity * light.color;
+	vec3 spec = texture(tex.specualr, TexCoord).rgb *  specularIntensity * light.color;
 
 	//ambient
-	vec3 ambi =  mat.Ka * texture(tex.diffuse, TexCoord).rgb * AmbientClr;
+	vec3 ambi =  texture(tex.diffuse, TexCoord).rgb * AmbientClr;
 
 	//reslut
 	vec3 result = (ambi + diff + spec);

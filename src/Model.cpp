@@ -59,6 +59,10 @@ void Model::LoadModel(std::string path)
 		std::cout << "[ASSIMP]::ERROR::Assimp ERROR..." << std::endl;
 		return;
 	}
+	else
+	{
+		std::cout << "[ASSIMP]::Success load model..." << std::endl;
+	}
 	directory = path.substr(0, path.find_last_of('/'));
 	ProcessNode(scene->mRootNode, scene);
 	

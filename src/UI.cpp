@@ -228,6 +228,69 @@ void UI::ImguiLightDlg()
 	{
 		ImGui::SetNextWindowSize(ImVec2(670, 158), ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowPos(ImVec2(10, 188), ImGuiCond_FirstUseEver);
+        if (ImGui::Button("Wireframe mode"))
+        {
+            b_Wireframe = !b_Wireframe;
+            if(b_Wireframe)
+                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            else
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+        if (ImGui::RadioButton("Diffuse", b_lam))
+        {
+            b_lam = !b_lam;
+        }
+        ImGui::SliderFloat("InnerLevel", &m_innerLevel, 1.0, 64.0);
+        ImGui::SliderFloat("OuterLevel", &m_outerLevel, 1.0, 64.0);
+        ImGui::SliderFloat("Height fact", &m_fact, 1.0, 2.0);
+        ImGui::SliderInt("Aperture", &ap, 1, 8);
+        switch(ap)
+        {
+            case 1:
+                m_apterture = 1.4f; break;
+            case 2:
+                m_apterture = 2.0f; break;
+            case 3:
+                m_apterture = 2.8f; break;
+            case 4:
+                m_apterture = 4.0f; break;
+            case 5:
+                m_apterture = 5.6f; break;
+            case 6:
+                m_apterture = 8.0f; break;
+            case 7:
+                m_apterture = 11.0f; break;
+            case 8:
+                m_apterture = 16.0f; break;
+            default:
+                m_apterture = 1.4f; break;
+        }
+        ImGui::SliderInt("Shutter Speed", &shutterspeed, 1, 3);
+        switch(shutterspeed)
+        {
+            case 1:
+                m_shutterspeed = 1 / 30.0f; break;
+            case 2:
+                m_shutterspeed = 1 / 60.0f; break;
+            case 3:
+                m_shutterspeed = 1 / 200.0f; break;
+            default:
+                m_shutterspeed = 1 / 30.0f; break;
+        }
+        ImGui::SliderInt("Sensitivity", &sen, 1, 4);
+        switch(sen)
+        {
+            case 1:
+                m_sensitivity = 800.0f; break;
+            case 2:
+                m_sensitivity = 6400.0f; break;
+            case 3:
+                m_sensitivity = 12800.0f; break;
+            case 4:
+                m_sensitivity = 25600.0f; break;
+            default:
+                m_sensitivity = 25600.0f; break;
+        }
 		ImGui::Begin("Light", &b_showAppLight, ImGuiWindowFlags_None);
 		if (ImGui::TreeNode("Area Light..."))
 		{

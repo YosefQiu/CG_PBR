@@ -10,11 +10,9 @@ public:
 public:
     glm::mat4 GetViewMatrix();
     glm::mat4 LookAt();
-    void CameraUpdatePos();
     void CameraUpdateVec();
-    void CameraPitchYaw(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup);
-    void ProcessMouseMovementPitch(float deltaX, float deltaY);
-    void ProcessMouseMovementYaw(float deltaX, float deltaY);
+    void CameraUpdatePos();
+    void ProcessMouseMovement(float deltaX, float deltaY);
 public:
     glm::vec3 Position;
     glm::vec3 Target;
@@ -24,8 +22,8 @@ public:
     glm::vec3 WorldUp;
     float Pitch;
     float Yaw;
-	float SpeedX = 0.0f;
-	float SpeedY = 0.0f;
-	float SpeedZ = 0.0f;
+    float SpeedX = 0.0f;
+    float SpeedY = 0.0f;
+    float SpeedZ = 0.0f;
     float Zoom = 45.0f;
 };
