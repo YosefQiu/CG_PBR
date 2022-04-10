@@ -6,6 +6,7 @@ Model::Model(std::string path)
 {
 	float floatMax = numeric_limits<float>::max();
 	float floatMin = numeric_limits<float>::min();
+	
 	MinVec = glm::vec3(floatMax, floatMax, floatMax);
 	MaxVec = glm::vec3(floatMin, floatMin, floatMin);
 	center = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -35,6 +36,81 @@ void Model::SetLight(Shader* shader, LightDirection* lightD /*= NULL*/, LightPoi
 		SetLightS(shader, lightS);
 }
 
+void Model::SetImguiParameter(Shader* shader, UI* myUI)
+{
+	shader->Use();
+	shader->SetFloat("fact", myUI->m_heightFactor);
+	shader->SetBool("b_lam", myUI->b_lam);
+	shader->SetFloat("aperture", myUI->m_apterture);
+	shader->SetFloat("shutterSpeed", myUI->m_shutterspeed);
+	shader->SetFloat("sensitivity", myUI->m_sensitivity);
+	shader->SetFloat("innerLevel", myUI->m_innerLevel);
+	shader->SetFloat("outerLevel", myUI->m_outerLevel);
+	if (myUI->m_matType == PARAMETER)
+	{
+		shader->SetVec3("albedo", glm::vec3(myUI->m_matAlbedo[0], myUI->m_matAlbedo[1], myUI->m_matAlbedo[2]));
+		shader->SetVec3("sheenColor", glm::vec3(myUI->m_matSheenColor[0], myUI->m_matSheenColor[1], myUI->m_matSheenColor[2]));
+		shader->SetFloat("metallic", myUI->m_matMetallic);
+		shader->SetFloat("roughness", myUI->m_matRoughness);
+		shader->SetFloat("ao", myUI->m_matAo);
+	}
+}
+
+void Model::SetImguiParameter(UI* myUI)
+{
+	m_shader->Use();
+	m_shader->SetFloat("fact", myUI->m_heightFactor);
+	m_shader->SetBool("b_lam", myUI->b_lam);
+	m_shader->SetFloat("aperture", myUI->m_apterture);
+	m_shader->SetFloat("shutterSpeed", myUI->m_shutterspeed);
+	m_shader->SetFloat("sensitivity", myUI->m_sensitivity);
+	m_shader->SetFloat("innerLevel", myUI->m_innerLevel);
+	m_shader->SetFloat("outerLevel", myUI->m_outerLevel);
+}
+
+void Model::SetTexture(std::string pathRoot)
+{
+	// get path
+	std::vector<std::string> textureName = { "albedo.jpg", "normal.jpg", "metallic.jpg", "roughness.jpg", "ao.jpg", "height.png" };
+	std::vector<std::string> textureType = { "albedo", "normal", "metallic", "roughness", "ao", "height" };
+	m_texPath.clear();
+	m_mapTexnameToTexid.clear();
+	m_mapTexpathToTexname.clear();
+	for (int i = 0; i < textureName.size(); i++)
+	{
+		m_texPath.push_back((string(pathRoot) + textureName[i]));
+	}
+	
+	
+	for (int i = 0; i < m_texPath.size(); i++)
+	{
+		m_mapTexpathToTexname.insert(std::pair < std::string , std::string > (m_texPath[i], textureType[i]));
+		m_mapTexnameToTexid.insert(std::pair<std::string, unsigned int>(m_mapTexpathToTexname[m_texPath[i]], LoadTexture(m_texPath[i].c_str())));
+	}
+
+}
+
+unsigned int Model::GetTextureID(std::string textureType)
+{
+	return m_mapTexnameToTexid[textureType];
+}
+
+void Model::BindTexture()
+{
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, GetTextureID("albedo"));
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, GetTextureID("normal"));
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, GetTextureID("metallic"));
+	glActiveTexture(GL_TEXTURE3);
+	glBindTexture(GL_TEXTURE_2D, GetTextureID("roughness"));
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, GetTextureID("ao"));
+	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, GetTextureID("height"));
+}
+
 glm::vec3 Model::GetCameraPos()
 {
 	return camera_pos;
@@ -48,6 +124,11 @@ glm::vec3 Model::GetCameraTarget()
 glm::vec3 Model::GetModelCenter()
 {
 	return center;
+}
+
+Shader* Model::GetShader()
+{
+	return m_shader;
 }
 
 void Model::LoadModel(std::string path)
@@ -113,6 +194,36 @@ unsigned int Model::LoadTexture(const char* path, const string& directory)
 	stbi_image_free(data);
 
 	return textureID;
+}
+
+unsigned int Model::LoadTexture(const char* path)
+{
+	unsigned int TextureID;
+
+	glGenTextures(1, &TextureID);
+	int width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		GLenum format;
+		if (nrChannels == 3)
+			format = GL_RGB;
+		else if (nrChannels == 4)
+			format = GL_RGBA;
+		glBindTexture(GL_TEXTURE_2D, TextureID);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		std::cout << "[IMAGE]::Success to load image [" << path << "] " << std::endl;
+	}
+	else
+		std::cout << "ERROR:Failed to load texture..." << std::endl;
+	stbi_image_free(data);
+	return TextureID;
 }
 
 std::vector<MyTexture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
@@ -273,4 +384,38 @@ void Model::SetLightS(Shader* shader, LightSpot* lightS)
 	shader->SetFloat("lightS.quadratic", lightS->quadratic);
 	shader->SetFloat("lightS.cosInnerPhy", lightS->cosInnerPhy);
 	shader->SetFloat("lightS.cosOutterPhy", lightS->cosOutterPhy);
+}
+
+void Model::SetMVP(Shader* shader, glm::mat4 M, glm::mat4 V, glm::mat4 P)
+{
+	shader->Use();
+	shader->SetMat4("M", M);
+	shader->SetMat4("V", V);
+	shader->SetMat4("P", P);
+}
+
+void Model::SetMVP(glm::mat4 M, glm::mat4 V, glm::mat4 P)
+{
+	m_shader->Use();
+	m_shader->SetMat4("M", M);
+	m_shader->SetMat4("V", V);
+	m_shader->SetMat4("P", P);
+}
+
+void Model::SetMVP()
+{
+	m_shader->Use();
+	m_shader->SetMat4("M", m_ModelMatrix);
+	m_shader->SetMat4("V", m_ViewMatrix);
+	m_shader->SetMat4("P", m_ProjMatrix);
+}
+
+void Model::SetShader(const char* vertexPath, const char* fragmentPath, const char* geometryPath /*= NULL*/, const char* tessControlPath /*= NULL*/, const char* tessEvalPath /*= NULL*/)
+{
+	m_shader = new Shader(vertexPath, fragmentPath, geometryPath, tessControlPath, tessEvalPath);
+}
+
+void Model::SetShader(Shader* shader)
+{
+	m_shader = shader;
 }

@@ -11,20 +11,16 @@ Camera::Camera (glm::vec3 position, glm::vec3 target, glm::vec3 worldup)
 	Right = glm::normalize(Right);
 	Up = glm::cross(Forward, Right);
 	Up = glm::normalize(Up);
-
-
 	const glm::vec3 yUnit(0, 1, 0);
 	const glm::vec3 xUnit(1, 0, 0);
     const glm::vec3 zUnit(0, 0, 1);
     float pitch = glm::degrees(-glm::asin(glm::dot(Forward, yUnit)));
-    cout << "Pitch " << pitch << endl;
     glm::vec3 forward = Forward;
     forward.y = 0;
     forward = glm::normalize(forward);
     float yaw = glm::degrees(glm::acos(glm::dot(forward, xUnit)));
     if (glm::dot(forward, zUnit) > 0)
         yaw = 360 - yaw;
-    cout << "Yaw " << yaw << endl;
     Yaw = yaw;
     Pitch = pitch;
 }
@@ -50,7 +46,6 @@ Camera::Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldup)
 
 glm::mat4 Camera::GetViewMatrix()
 {
-//    return glm::lookAt(Position, Position + Forward, WorldUp);
     return LookAt();
 }
 

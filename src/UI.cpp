@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "Camera.h"
 void UI::ImguiInit()
 {
 	// create and bind ImGui's CONTEXT
@@ -21,6 +22,7 @@ void UI::ImguiCreateWindow()
 
 	ImguiMenuBar();
 	ImguiOpenDlg();
+	ImguiControlDlg();
 	ImguiMaterialDlg();
 	ImguiLightDlg();
 	ImguiCameraDlg();
@@ -39,6 +41,20 @@ void UI::ImguiRender()
 	glfwGetFramebufferSize(pWind, &display_w, &display_h);
 	glViewport(0, 0, display_w, display_h);
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());/*}}}*/
+}
+
+void UI::ImguiUpdateCamera(Camera* cam)
+{
+	m_camPos = cam->Position;
+	m_camTarget = cam->Target;
+	m_camWorldup = cam->WorldUp;
+	m_camPitch = cam->Pitch;
+	m_camYaw = cam->Yaw;
+}
+
+void UI::ImguiUpdateTexture(std::map<std::string, unsigned int> mapTexnameToTexid)
+{
+	m_mapTexnameToTexid = mapTexnameToTexid;
 }
 
 void UI::ImguiMenuBar()
@@ -66,7 +82,7 @@ void UI::ImguiMenuBar()
 			ImGui::MenuItem("Save");
 			if (b_showOpenDiag)
 			{
-				ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".obj", ".");
+				ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", nullptr, ".");
 				
 			}
 			
@@ -109,8 +125,33 @@ void UI::ImguiOpenDlg()
 			{
 				m_filePath.replace(pos, sub_str.length(), "/");
 			}
+			b_fileChange = true;
 		}
 		ImGuiFileDialog::Instance()->Close();
+	}
+}
+
+void UI::ImguiControlDlg()
+{
+	// Control window
+	if (b_showAppControls)
+	{
+		ImGui::SetNextWindowSize(ImVec2(300, 220), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowPos(ImVec2(950, 20), ImGuiCond_FirstUseEver);
+		ImGui::Begin("Control", &b_showAppControls, ImGuiWindowFlags_HorizontalScrollbar);
+		if (ImGui::RadioButton("Wire frame mode", b_wireframeEnabled))
+		{
+			b_wireframeEnabled = !b_wireframeEnabled;
+			if (b_wireframeEnabled)
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			else
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+		ImGui::SliderFloat("InnerLevel", &m_innerLevel, 1.0, 64.0);
+		ImGui::SliderFloat("OuterLevel", &m_outerLevel, 1.0, 64.0);
+		ImGui::SliderFloat("Height factor", &m_heightFactor, 1.0, 2.0);
+
+		ImGui::End();
 	}
 }
 
@@ -122,101 +163,134 @@ void UI::ImguiMaterialDlg()
 		ImGui::SetNextWindowSize(ImVec2(670, 158), ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiCond_FirstUseEver);
 		ImGui::Begin("Material", &b_showAppMaterial, ImGuiWindowFlags_HorizontalScrollbar);
-
-		ImGui::BeginGroup();
-		ImGui::Text("    Albedo");
-		ImGui::Image((ImTextureID)1, ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
-
-		if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem | 
-			ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */ )
+		if (ImGui::TreeNode("Picture..."))
 		{
-			ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-			r.Expand(3.5f);
-			ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
-			hoveredPreviewItem = MaterialMapPreview::ALBEDO;
+			if (ImGui::Button("Change to current material type"))
+			{
+				m_matType = PICTURE;
+			}
+			ImGui::BeginGroup();
+			ImGui::Text("    Albedo");
+			ImGui::Image((ImTextureID)m_mapTexnameToTexid["albedo"], ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+
+			if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem |
+				ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
+			{
+				ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+				r.Expand(3.5f);
+				ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
+				hoveredPreviewItem = MaterialMapPreview::ALBEDO;
+			}
+
+			ImGui::EndGroup();
+
+			ImGui::SameLine();
+			ImGui::BeginGroup();
+			ImGui::Text("    Normal");
+			ImGui::Image((ImTextureID)m_mapTexnameToTexid["normal"], ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+			if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem |
+				ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
+			{
+				ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+				r.Expand(3.5f);
+				ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
+				hoveredPreviewItem = MaterialMapPreview::NORMAL;
+			}
+
+			ImGui::EndGroup();
+
+			ImGui::SameLine();
+			ImGui::BeginGroup();
+			ImGui::Text("   Metallic");
+			ImGui::Image((ImTextureID)m_mapTexnameToTexid["metallic"], ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+
+			if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem |
+				ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
+			{
+				ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+				r.Expand(3.5f);
+				ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
+				hoveredPreviewItem = MaterialMapPreview::METALLIC;
+			}
+
+			ImGui::EndGroup();
+
+			ImGui::SameLine();
+			ImGui::BeginGroup();
+			ImGui::Text("   Roughness");
+			ImGui::Image((ImTextureID)m_mapTexnameToTexid["roughness"], ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+
+			if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem |
+				ImGuiHoveredFlags_AllowWhenOverlapped)/* && dropTarget.AcceptFormat() */)
+			{
+				ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+				r.Expand(3.5f);
+				ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
+				hoveredPreviewItem = MaterialMapPreview::ROUGHNESS;
+			}
+
+			ImGui::EndGroup();
+
+			ImGui::SameLine();
+			ImGui::BeginGroup();
+			ImGui::Text("      AO");
+			ImGui::Image((ImTextureID)m_mapTexnameToTexid["ao"], ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+
+			if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem |
+				ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
+			{
+				ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+				r.Expand(3.5f);
+				ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
+				hoveredPreviewItem = MaterialMapPreview::AO;
+			}
+
+			ImGui::EndGroup();
+
+			ImGui::SameLine();
+			ImGui::BeginGroup();
+			ImGui::Text(" Displacement");
+			ImGui::Image((ImTextureID)m_mapTexnameToTexid["height"], ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
+
+			if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem |
+				ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
+			{
+				ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+				r.Expand(3.5f);
+				ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
+				hoveredPreviewItem = MaterialMapPreview::DISPLACEMENT;
+			}
+
+			ImGui::EndGroup();
+
+			ImGui::TreePop();
+			ImGui::Separator();
 		}
-
-		ImGui::EndGroup();
-
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("    Normal");
-		ImGui::Image((ImTextureID)2, ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
-		if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem | 
-			ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */) 
+		if (ImGui::TreeNode("Code..."))
 		{
-			ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-			r.Expand(3.5f);
-			ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
-			hoveredPreviewItem = MaterialMapPreview::NORMAL;
+			if (ImGui::Button("Change to current material type"))
+			{
+				m_matType = CODE;
+			}
+			ImGui::TreePop();
+			ImGui::Separator();
 		}
-
-		ImGui::EndGroup();
-
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("   Metallic");
-		ImGui::Image((ImTextureID)3, ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
-
-		if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem | 
-			ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
+		if (ImGui::TreeNode("Parameter..."))
 		{
-			ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-			r.Expand(3.5f);
-			ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
-			hoveredPreviewItem = MaterialMapPreview::METALLIC;
+			if (ImGui::Button("Change to current material type"))
+			{
+				m_matType = PARAMETER;
+			}
+			ImGui::SliderFloat3("ALBEDO", m_matAlbedo, 0.0, 1.0);
+			ImGui::SliderFloat3("SHEENCOLOR", m_matSheenColor, 0.0, 1.0);
+			ImGui::SliderFloat("METALLIC", &m_matMetallic, 0.0, 1.0);
+			ImGui::SliderFloat("ROUGHNESS", &m_matRoughness, 0.0, 1.0);
+			ImGui::SliderFloat("AO", &m_matAo, 0.0, 1.0);
+			
+
+			ImGui::TreePop();
+			ImGui::Separator();
 		}
-
-		ImGui::EndGroup();
-
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("   Roughness");
-		ImGui::Image((ImTextureID)4, ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
-
-		if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem | 
-			ImGuiHoveredFlags_AllowWhenOverlapped)/* && dropTarget.AcceptFormat() */) 
-		{
-			ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-			r.Expand(3.5f);
-			ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
-			hoveredPreviewItem = MaterialMapPreview::ROUGHNESS;
-		}
-
-		ImGui::EndGroup();
-
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("      AO");
-		ImGui::Image((ImTextureID)5, ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
-
-		if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem |
-			ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
-		{
-			ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-			r.Expand(3.5f);
-			ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
-			hoveredPreviewItem = MaterialMapPreview::AO;
-		}
-
-		ImGui::EndGroup();
-
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text(" Displacement");
-		ImGui::Image((ImTextureID)6, ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 0.5f));
-
-		if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem | 
-			ImGuiHoveredFlags_AllowWhenOverlapped) /* && dropTarget.AcceptFormat() */)
-		{
-			ImRect r(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-			r.Expand(3.5f);
-			ImGui::GetWindowDrawList()->AddRect(r.Min, r.Max, IM_COL32(255, 255, 0, 255), 0.0f, ~0, 2.0f);
-			hoveredPreviewItem = MaterialMapPreview::DISPLACEMENT;
-		}
-
-		ImGui::EndGroup();
-
 		ImGui::End();
 	}
 
@@ -228,73 +302,17 @@ void UI::ImguiLightDlg()
 	{
 		ImGui::SetNextWindowSize(ImVec2(670, 158), ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowPos(ImVec2(10, 188), ImGuiCond_FirstUseEver);
-        if (ImGui::Button("Wireframe mode"))
-        {
-            b_Wireframe = !b_Wireframe;
-            if(b_Wireframe)
-                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            else
-                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        }
-        if (ImGui::RadioButton("Diffuse", b_lam))
-        {
-            b_lam = !b_lam;
-        }
-        ImGui::SliderFloat("InnerLevel", &m_innerLevel, 1.0, 64.0);
-        ImGui::SliderFloat("OuterLevel", &m_outerLevel, 1.0, 64.0);
-        ImGui::SliderFloat("Height fact", &m_fact, 1.0, 2.0);
-        ImGui::SliderInt("Aperture", &ap, 1, 8);
-        switch(ap)
-        {
-            case 1:
-                m_apterture = 1.4f; break;
-            case 2:
-                m_apterture = 2.0f; break;
-            case 3:
-                m_apterture = 2.8f; break;
-            case 4:
-                m_apterture = 4.0f; break;
-            case 5:
-                m_apterture = 5.6f; break;
-            case 6:
-                m_apterture = 8.0f; break;
-            case 7:
-                m_apterture = 11.0f; break;
-            case 8:
-                m_apterture = 16.0f; break;
-            default:
-                m_apterture = 1.4f; break;
-        }
-        ImGui::SliderInt("Shutter Speed", &shutterspeed, 1, 3);
-        switch(shutterspeed)
-        {
-            case 1:
-                m_shutterspeed = 1 / 30.0f; break;
-            case 2:
-                m_shutterspeed = 1 / 60.0f; break;
-            case 3:
-                m_shutterspeed = 1 / 200.0f; break;
-            default:
-                m_shutterspeed = 1 / 30.0f; break;
-        }
-        ImGui::SliderInt("Sensitivity", &sen, 1, 4);
-        switch(sen)
-        {
-            case 1:
-                m_sensitivity = 800.0f; break;
-            case 2:
-                m_sensitivity = 6400.0f; break;
-            case 3:
-                m_sensitivity = 12800.0f; break;
-            case 4:
-                m_sensitivity = 25600.0f; break;
-            default:
-                m_sensitivity = 25600.0f; break;
-        }
+        
+        
+		
 		ImGui::Begin("Light", &b_showAppLight, ImGuiWindowFlags_None);
 		if (ImGui::TreeNode("Area Light..."))
 		{
 			ImGui::SetNextItemWidth(120);
+			if (ImGui::RadioButton("Diffuse", b_lam))
+			{
+				b_lam = !b_lam;
+			}
 			ImGui::Checkbox("AreaLight", &b_areaFlag); 
 			static bool ref_color = false;
 			static ImVec4 ref_color_v(1.0f, 0.0f, 1.0f, 0.5f);
@@ -359,14 +377,61 @@ void UI::ImguiCameraDlg()
 {
 	if (b_showAppCamera)
 	{
-		ImGui::SetNextWindowSize(ImVec2(670, 158), ImGuiCond_FirstUseEver);
-		ImGui::SetNextWindowPos(ImVec2(10, 215), ImGuiCond_FirstUseEver);
-		ImGui::Begin("Camera", &b_showAppCamera, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::SetNextWindowSize(ImVec2(300, 220), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowPos(ImVec2(950, 495), ImGuiCond_FirstUseEver);
+		ImGui::Begin("Camera", &b_showAppCamera, ImGuiWindowFlags_None);
 		ImGui::SetNextItemWidth(120);
 		ImGui::Text("Camera Position\n [%f \t %f \t %f]", m_camPos.x, m_camPos.y, m_camPos.z);
-		ImGui::Text("Camera Target\n [%f \t %f \t %f]", m_camTarget.x, m_camTarget.y, m_camTarget.z);
+		ImGui::Text("Camera Yaw\n [%f], Camera Pitch\n[%f]", m_camYaw, m_camPitch);
 		ImGui::Text("Camera WorldUp\n [%f \t %f \t %f]", m_camWorldup.x, m_camWorldup.y, m_camWorldup.z);
-
+		ImGui::SliderInt("Aperture", &m_camApterture, 1, 8);
+		switch (m_camApterture)
+		{
+		case 1:
+			m_apterture = 1.4f; break;
+		case 2:
+			m_apterture = 2.0f; break;
+		case 3:
+			m_apterture = 2.8f; break;
+		case 4:
+			m_apterture = 4.0f; break;
+		case 5:
+			m_apterture = 5.6f; break;
+		case 6:
+			m_apterture = 8.0f; break;
+		case 7:
+			m_apterture = 11.0f; break;
+		case 8:
+			m_apterture = 16.0f; break;
+		default:
+			m_apterture = 1.4f; break;
+		}
+		ImGui::SliderInt("Shutter Speed", &m_camShutterspeed, 1, 3);
+		switch (m_camShutterspeed)
+		{
+		case 1:
+			m_shutterspeed = 1 / 30.0f; break;
+		case 2:
+			m_shutterspeed = 1 / 60.0f; break;
+		case 3:
+			m_shutterspeed = 1 / 200.0f; break;
+		default:
+			m_shutterspeed = 1 / 30.0f; break;
+		}
+		ImGui::SliderInt("Sensitivity", &m_camSensitivity, 1, 4);
+		switch (m_camSensitivity)
+		{
+		case 1:
+			m_sensitivity = 800.0f; break;
+		case 2:
+			m_sensitivity = 6400.0f; break;
+		case 3:
+			m_sensitivity = 12800.0f; break;
+		case 4:
+			m_sensitivity = 25600.0f; break;
+		default:
+			m_sensitivity = 25600.0f; break;
+		}
 		ImGui::End();
 	}
 	
@@ -376,10 +441,23 @@ void UI::ImguiDisneyDlg()
 {
 	if (b_showAppDisney)
 	{
-		ImGui::SetNextWindowSize(ImVec2(670, 158), ImGuiCond_FirstUseEver);
-		ImGui::SetNextWindowPos(ImVec2(1100, 515), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowSize(ImVec2(300, 220), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowPos(ImVec2(950, 205), ImGuiCond_FirstUseEver);
 		ImGui::Begin("Disney", &b_showAppDisney, ImGuiWindowFlags_None);
 		ImGui::SetNextItemWidth(120);
+		float v[3] = { m_disneyBaseColor.x, m_disneyBaseColor.y, m_disneyBaseColor.z };
+		ImGui::SliderFloat3("base color", v, 0.0, 1.0);
+		
+		ImGui::SliderFloat("Subsurface", &m_disneySubsurface, 0.0, 1.0);
+		ImGui::SliderFloat("Metallic", &m_disneyMetallic, 0.0, 1.0);
+		ImGui::SliderFloat("Specular", &m_disneySpecular, 0.0, 1.0);
+		ImGui::SliderFloat("SpecularTint", &m_disneySpecularTint, 0.0, 1.0);
+		ImGui::SliderFloat("Roughness", &m_disneyRoughness, 0.0, 1.0);
+		ImGui::SliderFloat("Anisotropic", &m_disneyAnisotropic, 0.0, 1.0);
+		ImGui::SliderFloat("Sheen", &m_disneySheen, 0.0, 1.0);
+		ImGui::SliderFloat("SheenTint", &m_disneySheenTint, 0.0, 1.0);
+		ImGui::SliderFloat("Clearcoat", &m_disneyClearcoat, 0.0, 1.0);
+		ImGui::SliderFloat("ClearcoatGloss", &m_disneyClearcoatGloss, 0.0, 1.0);
 
 		ImGui::End();
 	}
