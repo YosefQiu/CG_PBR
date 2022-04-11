@@ -38,22 +38,41 @@ void Model::SetLight(Shader* shader, LightDirection* lightD /*= NULL*/, LightPoi
 
 void Model::SetImguiParameter(Shader* shader, UI* myUI)
 {
-	shader->Use();
-	shader->SetFloat("fact", myUI->m_heightFactor);
-	shader->SetBool("b_lam", myUI->b_lam);
-	shader->SetFloat("aperture", myUI->m_apterture);
-	shader->SetFloat("shutterSpeed", myUI->m_shutterspeed);
-	shader->SetFloat("sensitivity", myUI->m_sensitivity);
-	shader->SetFloat("innerLevel", myUI->m_innerLevel);
-	shader->SetFloat("outerLevel", myUI->m_outerLevel);
-	if (myUI->m_matType == PARAMETER)
-	{
-		shader->SetVec3("albedo", glm::vec3(myUI->m_matAlbedo[0], myUI->m_matAlbedo[1], myUI->m_matAlbedo[2]));
-		shader->SetVec3("sheenColor", glm::vec3(myUI->m_matSheenColor[0], myUI->m_matSheenColor[1], myUI->m_matSheenColor[2]));
-		shader->SetFloat("metallic", myUI->m_matMetallic);
-		shader->SetFloat("roughness", myUI->m_matRoughness);
-		shader->SetFloat("ao", myUI->m_matAo);
-	}
+    if(myUI->m_matType != CODE)
+    {
+        shader->Use();
+        shader->SetFloat("fact", myUI->m_heightFactor);
+        shader->SetBool("b_lam", myUI->b_lam);
+        shader->SetFloat("aperture", myUI->m_apterture);
+        shader->SetFloat("shutterSpeed", myUI->m_shutterspeed);
+        shader->SetFloat("sensitivity", myUI->m_sensitivity);
+        shader->SetFloat("innerLevel", myUI->m_innerLevel);
+        shader->SetFloat("outerLevel", myUI->m_outerLevel);
+        if (myUI->m_matType == PARAMETER)
+        {
+            shader->SetVec3("albedo", glm::vec3(myUI->m_matAlbedo[0], myUI->m_matAlbedo[1], myUI->m_matAlbedo[2]));
+            shader->SetVec3("sheenColor", glm::vec3(myUI->m_matSheenColor[0], myUI->m_matSheenColor[1], myUI->m_matSheenColor[2]));
+            shader->SetFloat("metallic", myUI->m_matMetallic);
+            shader->SetFloat("roughness", myUI->m_matRoughness);
+            shader->SetFloat("ao", myUI->m_matAo);
+        }
+    }
+    if(myUI->m_matType == CODE)
+    {
+        shader->Use();
+        shader->SetFloat("fact", myUI->m_heightFactor);
+        shader->SetBool("b_lam", myUI->b_lam);
+        shader->SetFloat("aperture", myUI->m_apterture);
+        shader->SetFloat("shutterSpeed", myUI->m_shutterspeed);
+        shader->SetFloat("sensitivity", myUI->m_sensitivity);
+        shader->SetFloat("innerLevel", myUI->m_innerLevel);
+        shader->SetFloat("outerLevel", myUI->m_outerLevel);
+        
+        shader->SetFloat("metallic", myUI->m_matMetallic);
+        shader->SetFloat("roughness", myUI->m_matRoughness);
+        shader->SetFloat("ao", myUI->m_matAo);
+    }
+	
 }
 
 void Model::SetImguiParameter(UI* myUI)

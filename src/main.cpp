@@ -17,8 +17,10 @@ unique_ptr<Camera>	myCamera = NULL;
 unique_ptr<UI>		myUI	 = NULL;
 Model*	mySphere			 = NULL;
 Model*  myClothes			 = NULL;
+Model*  myNoise              = NULL;
 Shader* teapotshader		 = NULL;
 Shader* clothesshader		 = NULL;
+Shader* noiseshader          = NULL;
 Scene*	myScene				 = NULL;
 
 #pragma region interactive
@@ -117,6 +119,7 @@ int main(int argc, char* argv[])
 	string obj_filename = "../res/model/sphere.obj";
 	mySphere = new Model(obj_filename);
 	myClothes = new Model(obj_filename);
+    myNoise = new Model(obj_filename); 
 #pragma endregion loadmodel
 
 #pragma region shader
@@ -124,12 +127,15 @@ int main(int argc, char* argv[])
 	mySphere->SetShader(teapotshader);
 	clothesshader = new Shader("../res/shader/vert.glsl", "../res/shader/brdf.glsl", NULL, "../res/shader/tctl.glsl", "../res/shader/teva.glsl");
 	myClothes->SetShader(clothesshader);
+	noiseshader = new Shader("../res/shader/vert.glsl", "../res/shader/noise.glsl", NULL, "../res/shader/tctl.glsl", "../res/shader/teva.glsl");
+    myNoise->SetShader(noiseshader);
 #pragma endregion shader
 
 #pragma region loadscene
 	myScene = new Scene();
 	myScene->LoadScene("Sphere", mySphere);
 	myScene->LoadScene("Clothes", myClothes);
+    myScene->LoadScene("Noise", myNoise);
 #pragma endregion loadscene
 
 #pragma region loadcamera
@@ -224,4 +230,14 @@ void RenderMain()
 			myScene->DrawScene("Clothes", false, false);
 		}
 	}
+    if(myUI->m_matType == CODE)
+    {
+        glm::mat4 rot = glm::mat4(1.0f);
+        rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        myScene->GetModel("Noise")->SetMVP(rot * ModelMatrix, ViewMatrix, ProjMatrix);
+        myScene->GetModel("Noise")->GetShader()->SetVec2("u_resolution", glm::vec2(1280.0f, 720.0f));
+        myScene->GetModel("Noise")->GetShader()->SetFloat("u_time", (float)glfwGetTime());
+        myScene->GetModel("Noise")->SetImguiParameter(noiseshader, myUI.get());
+        myScene->DrawScene("Noise", false, false);
+    }
 }

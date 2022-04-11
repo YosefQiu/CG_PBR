@@ -139,4 +139,10 @@ public:
 	float m_disneySheenTint = 0.0f;
 	float m_disneyClearcoat = 0.0f;
 	float m_disneyClearcoatGloss = 0.0f;
+
+//** ------------
+//** Stats parameter
+//** ------------
+	float m_statsMousePosX = 0.0f;
+	float m_statsMousePosY = 0.0f;
 };

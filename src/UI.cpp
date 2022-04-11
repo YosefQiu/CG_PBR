@@ -441,8 +441,8 @@ void UI::ImguiDisneyDlg()
 {
 	if (b_showAppDisney)
 	{
-		ImGui::SetNextWindowSize(ImVec2(300, 220), ImGuiCond_FirstUseEver);
-		ImGui::SetNextWindowPos(ImVec2(950, 205), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowSize(ImVec2(300, 245), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowPos(ImVec2(950, 245), ImGuiCond_FirstUseEver);
 		ImGui::Begin("Disney", &b_showAppDisney, ImGuiWindowFlags_None);
 		ImGui::SetNextItemWidth(120);
 		float v[3] = { m_disneyBaseColor.x, m_disneyBaseColor.y, m_disneyBaseColor.z };
@@ -471,12 +471,16 @@ void UI::ImguiStatsDlg()
 		ImVec2 window_pos = ImVec2(3.0f, io.DisplaySize.y - 3.0f);
 		ImVec2 window_pos_pivot = ImVec2(0.0f, 1.0f);
 		ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+        
 		if (ImGui::Begin("Example: Simple overlay", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoInputs))
 		{
 			ImGui::Text("%.3f ms/frame", 1000.0f / ImGui::GetIO().Framerate);
 			ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
 
-			if (ImGui::IsMousePosValid()) {
+			if (ImGui::IsMousePosValid())
+            {
+                m_statsMousePosX = io.MousePos.x;
+                m_statsMousePosY = io.MousePos.y;
 				ImGui::Text("Mouse Position: (%.1f,%.1f)", io.MousePos.x, io.MousePos.y);
 			}
 			else {
