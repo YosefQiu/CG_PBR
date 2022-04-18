@@ -51,7 +51,7 @@ glm::mat4 Camera::GetViewMatrix()
 
 void Camera::CameraUpdatePos()
 {
-    Position += Forward * SpeedZ * 0.05f + Right * SpeedX * 0.05f + Up * SpeedY * 0.05f;
+    Position += Forward * SpeedZ  + Right * SpeedX + Up * SpeedY ;
 }
 
 glm::mat4 Camera::LookAt()

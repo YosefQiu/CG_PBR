@@ -26,6 +26,7 @@ public:
 		m_radius = 0.2355;
 		m_rectWidth_Height[0] = 0.5;
 		m_rectWidth_Height[1] = 0.44;
+		m_iblPath = "../res/pic/IBL/Walk_Of_Fame/Mans_Outside_2k.hdr";
 	};
 	virtual ~UI() {};
 public:
@@ -52,7 +53,7 @@ public:
 	bool b_showAppControls = true;
 	bool b_showAppMaterial = true;
 	bool b_showAppStats = true;
-	bool b_showAppLight = false;
+	bool b_showAppLight = true;
 	bool b_showAppCamera = true;
 	bool b_showOpenDiag = true;
 	bool b_showAppDisney = true;
@@ -116,6 +117,8 @@ public:
 	ImVec4 m_areaColr;
 	float m_radius;
 	float m_rectWidth_Height[2];
+	std::string m_iblPath;
+	bool b_ibl = false;
 	
 //** ------------
 //** model UI parameter

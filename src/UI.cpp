@@ -139,6 +139,17 @@ void UI::ImguiControlDlg()
 		ImGui::SetNextWindowSize(ImVec2(300, 220), ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowPos(ImVec2(950, 20), ImGuiCond_FirstUseEver);
 		ImGui::Begin("Control", &b_showAppControls, ImGuiWindowFlags_HorizontalScrollbar);
+		static int style_idx = 0;
+		const char* label = "Window Style";
+		if (ImGui::Combo(label, &style_idx, "Dark\0Light\0Classic\0"))
+		{
+			switch (style_idx)
+			{
+			case 0: ImGui::StyleColorsDark(); break;
+			case 1: ImGui::StyleColorsLight(); break;
+			case 2: ImGui::StyleColorsClassic(); break;
+			}
+		}
 		if (ImGui::RadioButton("Wire frame mode", b_wireframeEnabled))
 		{
 			b_wireframeEnabled = !b_wireframeEnabled;
@@ -160,7 +171,7 @@ void UI::ImguiMaterialDlg()
 	// Material window
 	if (b_showAppMaterial) 
 	{
-		ImGui::SetNextWindowSize(ImVec2(670, 158), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowSize(ImVec2(670, 230), ImGuiCond_FirstUseEver);
 		ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiCond_FirstUseEver);
 		ImGui::Begin("Material", &b_showAppMaterial, ImGuiWindowFlags_HorizontalScrollbar);
 		if (ImGui::TreeNode("Picture..."))
@@ -300,8 +311,8 @@ void UI::ImguiLightDlg()
 {
 	if (b_showAppLight)
 	{
-		ImGui::SetNextWindowSize(ImVec2(670, 158), ImGuiCond_FirstUseEver);
-		ImGui::SetNextWindowPos(ImVec2(10, 188), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowSize(ImVec2(345, 365), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowPos(ImVec2(10, 275), ImGuiCond_FirstUseEver);
         
         
 		
@@ -359,7 +370,39 @@ void UI::ImguiLightDlg()
 			}
 			if (ImGui::TreeNode("IBL(Image base light)..."))
 			{
-
+				static int style_idx = 1;
+				const char* label = "IBL";
+				if (ImGui::Combo(label, &style_idx, "None\0Walk Of Fame\0PaperMill\0Arches\0NewportLoft\0"))
+				{
+					switch (style_idx)
+					{
+						case 0: b_ibl = false; break;
+						case 1: 
+						{
+							b_ibl = true;
+							m_iblPath = "../res/pic/IBL/Walk_Of_Fame/Mans_Outside_2k.hdr";
+						}
+						break;
+						case 2: 
+						{
+							b_ibl = true;
+							m_iblPath = "../res/pic/IBL/PaperMill_Ruins_A/PaperMill_A_3k.hdr";
+						}
+						break;
+						case 3:
+						{
+							b_ibl = true;
+							m_iblPath = "../res/pic/IBL/Arches_E_PineTree/Arches_E_PineTree_3k.hdr";
+						}
+						break;
+						case 4:
+						{
+							b_ibl = true;
+							m_iblPath = "../res/pic/IBL/Newport_Loft/Newport_Loft_Ref.hdr";
+						}
+						break;
+					}
+				}
 
 				ImGui::TreePop();
 				ImGui::Separator();
