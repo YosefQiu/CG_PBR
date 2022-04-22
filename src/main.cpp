@@ -23,9 +23,12 @@ unique_ptr<UI>		myUI	 = NULL;
 Model*	mySphere			 = NULL;
 Model*  myClothes			 = NULL;
 Model*  myNoise              = NULL;
+Model* myDisney = NULL;
+
 Shader* teapotshader		 = NULL;
 Shader* clothesshader		 = NULL;
 Shader* noiseshader          = NULL;
+Shader* disneyshader = NULL;
 
 Shader* equirectangularToCubemapShader = NULL;
 Shader* irradianceShader = NULL;
@@ -37,60 +40,7 @@ IBL* myIbl = NULL;
 
 Scene*	myScene				 = NULL;
 
-#pragma region interactive
 
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
-
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-{
-	
-}
-
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
-
-}
-
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-#pragma region cameraview
-#pragma region cameraview
-	if (key == GLFW_KEY_W && action == GLFW_PRESS)
-		myCamera->SpeedZ = 1.0f;
-	else if (key == GLFW_KEY_S && action == GLFW_PRESS)
-		myCamera->SpeedZ = -1.0f;
-	else
-		myCamera->SpeedZ = 0.0f;
-	myCamera->CameraUpdatePos();
-	myUI->ImguiUpdateCamera(myCamera);
-	if (key == GLFW_KEY_A && action == GLFW_PRESS)
-		myCamera->SpeedX = -1.0f;
-	else if (key == GLFW_KEY_D && action == GLFW_PRESS)
-		myCamera->SpeedX = 1.0f;
-	else
-		myCamera->SpeedX = 0.0f;
-	myCamera->CameraUpdatePos();
-	myUI->ImguiUpdateCamera(myCamera);
-	if (key == GLFW_KEY_Q && action == GLFW_PRESS)
-		myCamera->SpeedY = 1.0f;
-	else if (key == GLFW_KEY_E && action == GLFW_PRESS)
-		myCamera->SpeedY = -1.0f;
-	else
-		myCamera->SpeedY = 0.0f;
-	myCamera->CameraUpdatePos();
-	myUI->ImguiUpdateCamera(myCamera);
-#pragma endregion cameraview
-#pragma endregion cameraview
-
-    
-}
-#pragma endregion interactive
 
 
 void RenderMain();
@@ -106,11 +56,84 @@ glm::vec3 lightPosition[] =
 {
 	glm::vec3(0.0f, 0.0f, 5.0f),
 };
-glm::vec3 lightColor[] =
+
+glm::vec3 lightPosition1[] =
 {
-	glm::vec3(150.0f, 150.0f, 150.0f),
+	glm::vec3(0.0f, 0.0f, 25.0f),
 };
 
+glm::vec3 lightColor[] =
+{
+	glm::vec3(300.0f, 300.0f, 300.0f),
+};
+
+#pragma region interactive
+
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+
+	if (key == GLFW_KEY_J && action == GLFW_PRESS)
+		lightPosition1[0].x - 1.0f;
+	if (key == GLFW_KEY_L && action == GLFW_PRESS)
+		lightPosition1[0].x + 1.0f;
+	if (key == GLFW_KEY_L && action == GLFW_PRESS)
+		lightPosition1[0].y - 1.0f;
+	if (key == GLFW_KEY_O && action == GLFW_PRESS)
+		lightPosition1[0].y + 1.0f;
+	if (key == GLFW_KEY_U && action == GLFW_PRESS)
+		lightPosition1[0].z - 1.0f;
+	if (key == GLFW_KEY_P && action == GLFW_PRESS)
+		lightPosition1[0].z + 1.0f;
+
+#pragma region cameraview
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+		myCamera->SpeedY = 1.0f;
+	else if (key == GLFW_KEY_S && action == GLFW_PRESS)
+		myCamera->SpeedY = -1.0f;
+	else
+		myCamera->SpeedY = 0.0f;
+	myCamera->CameraUpdatePos();
+	myUI->ImguiUpdateCamera(myCamera);
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
+		myCamera->SpeedX = -1.0f;
+	else if (key == GLFW_KEY_D && action == GLFW_PRESS)
+		myCamera->SpeedX = 1.0f;
+	else
+		myCamera->SpeedX = 0.0f;
+	myCamera->CameraUpdatePos();
+	myUI->ImguiUpdateCamera(myCamera);
+	if (key == GLFW_KEY_Q && action == GLFW_PRESS)
+		myCamera->SpeedZ = 1.0f;
+	else if (key == GLFW_KEY_E && action == GLFW_PRESS)
+		myCamera->SpeedZ = -1.0f;
+	else
+		myCamera->SpeedZ = 0.0f;
+	myCamera->CameraUpdatePos();
+	myUI->ImguiUpdateCamera(myCamera);
+#pragma endregion cameraview
+
+
+
+}
+#pragma endregion interactive
 int main(int argc, char* argv[])
 {
 #pragma region createwind
@@ -142,9 +165,10 @@ int main(int argc, char* argv[])
 	mySphere = new Model(obj_filename);
 	myClothes = new Model(obj_filename);
     myNoise = new Model(obj_filename); 
+	myDisney = new Model(obj_filename);
 #pragma endregion loadmodel
 
-	glDepthFunc(GL_LEQUAL);
+	
 
 
 #pragma region shader
@@ -154,6 +178,9 @@ int main(int argc, char* argv[])
 	myClothes->SetShader(clothesshader);
 	noiseshader = new Shader("../res/shader/vert.glsl", "../res/shader/noise.glsl", NULL, "../res/shader/tctl.glsl", "../res/shader/teva.glsl");
     myNoise->SetShader(noiseshader);
+
+	disneyshader = new Shader("../res/shader/vert.glsl", "../res/shader/Disney_frag.glsl", NULL, "../res/shader/tctl.glsl", "../res/shader/teva.glsl");
+	myDisney->SetShader(disneyshader);
 
 	//IBL Shader
 	equirectangularToCubemapShader = new Shader("../res/shader/equirectangular_to_cubemap_vert.glsl", "../res/shader/equirectangular_to_cubemap_frag.glsl", NULL, NULL, NULL);
@@ -171,6 +198,7 @@ int main(int argc, char* argv[])
 	myScene->LoadScene("Sphere", mySphere);
 	myScene->LoadScene("Clothes", myClothes);
     myScene->LoadScene("Noise", myNoise);
+	myScene->LoadScene("Disney", myDisney);
 #pragma endregion loadscene
 
 	myIbl = new IBL(myUI->m_iblPath);
@@ -216,12 +244,16 @@ int main(int argc, char* argv[])
 #pragma region renderscene
 		
 		myScene->Render(RenderMain);
-		myIbl->GetShader("backgroundShader")->Use();
-		myIbl->GetShader("backgroundShader")->SetMat4("V", myCamera->GetViewMatrix());
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, myIbl->m_envCubemap);
-		//glBindTexture(GL_TEXTURE_2D, irradianceMap);
-		myIbl->RenderCube();
+		if (myUI->b_ibl)
+		{
+			myIbl->GetShader("backgroundShader")->Use();
+			myIbl->GetShader("backgroundShader")->SetMat4("V", myCamera->GetViewMatrix());
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, myIbl->m_envCubemap);
+			//glBindTexture(GL_TEXTURE_2D, irradianceMap);
+			myIbl->RenderCube();
+		}
+		
 
 		// find imgui api
 		//ImGui::ShowDemoWindow();
@@ -243,11 +275,11 @@ int main(int argc, char* argv[])
 
 void RenderMain()
 {
-	if (myUI->b_ibl)
+	if (myUI->b_ibl && myUI->b_iblFirst)
 	{
 		myIbl->SetHdrFilepath(myUI->m_iblPath);
 		myIbl->Init();
-		myUI->b_ibl = false;
+		myUI->b_iblFirst = false;
 	}
 	if (myUI->m_matType == PICTURE)
 	{
@@ -273,6 +305,7 @@ void RenderMain()
 		myScene->GetModel("Sphere")->SetImguiParameter(teapotshader, myUI.get());
 		myScene->GetModel("Sphere")->BindTexture();
 		myScene->GetModel("Sphere")->GetShader()->Use();
+		myScene->GetModel("Sphere")->GetShader()->SetBool("b_ibl", myUI->b_ibl);
 		glActiveTexture(GL_TEXTURE6);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, myIbl->m_irradianceMap);
 		glActiveTexture(GL_TEXTURE7);
@@ -316,4 +349,29 @@ void RenderMain()
         myScene->GetModel("Noise")->SetImguiParameter(noiseshader, myUI.get());
         myScene->DrawScene("Noise", false, false);
     }
+	if (myUI->m_matType == DISNEY)
+	{
+		glm::mat4 rot = glm::mat4(1.0f);
+		rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		myScene->GetModel("Disney")->SetMVP(rot * ModelMatrix, ViewMatrix, ProjMatrix);
+		myScene->GetModel("Disney")->GetShader()->SetVec3("cameraPosition", myCamera->Position);
+		myScene->GetModel("Disney")->SetImguiParameter(disneyshader, myUI.get());
+		myScene->GetModel("Disney")->GetShader()->Use();
+		myScene->GetModel("Disney")->GetShader()->SetBool("b_ibl", myUI->b_ibl);
+		glActiveTexture(GL_TEXTURE6);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, myIbl->m_irradianceMap);
+		glActiveTexture(GL_TEXTURE7);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, myIbl->m_prefilterMap);
+		glActiveTexture(GL_TEXTURE8);
+		glBindTexture(GL_TEXTURE_2D, myIbl->m_brdfLUTTexture);
+		for (int i = 0; i < sizeof(lightPosition1) / sizeof(lightPosition1[0]); i++)
+		{
+			
+			glm::vec3 newPos = lightPosition1[i];
+			newPos = lightPosition1[i];
+			myScene->GetModel("Disney")->GetShader()->SetVec3("lightPosition[" + std::to_string(i) + "]", newPos);
+			myScene->GetModel("Disney")->GetShader()->SetVec3("lightColor[" + std::to_string(i) + "]", lightColor[i]);
+			myScene->DrawScene("Disney", false, false);
+		}
+	}
 }

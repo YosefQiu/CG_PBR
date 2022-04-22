@@ -26,6 +26,7 @@ uniform float sensitivity;
 uniform samplerCube irradianceMap;
 uniform samplerCube prefilterMap;
 uniform sampler2D brdfLUT;
+uniform bool b_ibl;
 
 out vec4 FragColor;
 
@@ -295,15 +296,28 @@ void main()
     vec3 irradiance = texture(irradianceMap, N).rgb;
     vec3 diffuse = irradiance * albedo;
 
+    vec3 ambient = vec3(0.0f);
+    if (b_ibl)
+    {
+        const float MAX_REFLECTION_LOD = 4.0f;
+        vec3 prefilteredColor = texture(prefilterMap, R, roughness * MAX_REFLECTION_LOD).rgb;
+        vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
+        vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
 
-    const float MAX_REFLECTION_LOD = 4.0f;
+        ambient = (kD * diffuse + specular) * ao;
+    }
+    else
+    {
+        ambient = vec3(0.03) * albedo * ao;
+    }
+   /* const float MAX_REFLECTION_LOD = 4.0f;
     vec3 prefilteredColor = texture(prefilterMap, R, roughness * MAX_REFLECTION_LOD).rgb;
     vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
 
-    vec3 ambient = (kD * diffuse + specular) * ao;
+    vec3 ambient = (kD * diffuse + specular) * ao;*/
     
     vec3 color = ambient + Lo;
 

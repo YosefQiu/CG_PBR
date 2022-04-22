@@ -9,7 +9,7 @@
 namespace MaterialMapPreview {
 	enum Type { ALBEDO, NORMAL, METALLIC, ROUGHNESS, AO, DISPLACEMENT, NONE };
 }
-enum MaterialType {PICTURE, CODE, PARAMETER};
+enum MaterialType {PICTURE, CODE, PARAMETER, DISNEY};
 class Camera;
 class UI
 {
@@ -119,6 +119,7 @@ public:
 	float m_rectWidth_Height[2];
 	std::string m_iblPath;
 	bool b_ibl = false;
+	bool b_iblFirst = true;
 	
 //** ------------
 //** model UI parameter
@@ -131,17 +132,17 @@ public:
 //** ------------
 //** Disney Principled BRDF parameter
 //** ------------
-	glm::vec3 m_disneyBaseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	float m_disneyBaseColor[3] = { 0.82f, 0.67f, 0.16f };
 	float m_disneySubsurface = 0.0f;
 	float m_disneyMetallic = 0.0f;
-	float m_disneySpecular = 0.0f;
+	float m_disneySpecular = 0.5f;
 	float m_disneySpecularTint = 0.0f;
-	float m_disneyRoughness = 0.0f;
+	float m_disneyRoughness = 0.5f;
 	float m_disneyAnisotropic = 0.0f;
 	float m_disneySheen = 0.0f;
-	float m_disneySheenTint = 0.0f;
+	float m_disneySheenTint = 0.5f;
 	float m_disneyClearcoat = 0.0f;
-	float m_disneyClearcoatGloss = 0.0f;
+	float m_disneyClearcoatGloss = 1.0f;
 
 //** ------------
 //** Stats parameter

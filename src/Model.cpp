@@ -38,7 +38,7 @@ void Model::SetLight(Shader* shader, LightDirection* lightD /*= NULL*/, LightPoi
 
 void Model::SetImguiParameter(Shader* shader, UI* myUI)
 {
-    if(myUI->m_matType != CODE)
+    if(myUI->m_matType != CODE && myUI->m_matType != DISNEY)
     {
         shader->Use();
         shader->SetFloat("fact", myUI->m_heightFactor);
@@ -72,6 +72,31 @@ void Model::SetImguiParameter(Shader* shader, UI* myUI)
         shader->SetFloat("roughness", myUI->m_matRoughness);
         shader->SetFloat("ao", myUI->m_matAo);
     }
+
+	if (myUI->m_matType == DISNEY)
+	{
+		shader->Use();
+		shader->SetFloat("aperture", myUI->m_apterture);
+		shader->SetFloat("shutterSpeed", myUI->m_shutterspeed);
+		shader->SetFloat("sensitivity", myUI->m_sensitivity);
+
+		shader->SetVec3("basecolor", glm::vec3(myUI->m_disneyBaseColor[0], myUI->m_disneyBaseColor[1], myUI->m_disneyBaseColor[2]));
+		shader->SetFloat("subsurface", myUI->m_disneySubsurface);
+		shader->SetFloat("metallic", myUI->m_disneyMetallic);
+		shader->SetFloat("specular", myUI->m_disneySpecular);
+		shader->SetFloat("specularTint", myUI->m_disneySpecularTint);
+		shader->SetFloat("roughness", myUI->m_disneyRoughness);
+		shader->SetFloat("anisotropic", myUI->m_disneyAnisotropic);
+		shader->SetFloat("sheen", myUI->m_disneySheen);
+		shader->SetFloat("sheenTint", myUI->m_disneySheenTint);
+		shader->SetFloat("clearcoat", myUI->m_disneyClearcoat);
+		shader->SetFloat("clearcoatGloss", myUI->m_disneyClearcoatGloss);
+
+		shader->SetFloat("fact", myUI->m_heightFactor);
+		shader->SetFloat("innerLevel", myUI->m_innerLevel);
+		shader->SetFloat("outerLevel", myUI->m_outerLevel);
+
+	}
 	
 }
 

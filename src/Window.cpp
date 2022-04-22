@@ -77,6 +77,7 @@ bool Window::Init()
     }
     glViewport(0, 0, SCREEN_WIGHT, SCREEN_HEIGHT);
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
     return true;
 }
 

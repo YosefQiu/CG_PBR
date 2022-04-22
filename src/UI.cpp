@@ -370,7 +370,7 @@ void UI::ImguiLightDlg()
 			}
 			if (ImGui::TreeNode("IBL(Image base light)..."))
 			{
-				static int style_idx = 1;
+				static int style_idx = 0;
 				const char* label = "IBL";
 				if (ImGui::Combo(label, &style_idx, "None\0Walk Of Fame\0PaperMill\0Arches\0NewportLoft\0"))
 				{
@@ -380,23 +380,27 @@ void UI::ImguiLightDlg()
 						case 1: 
 						{
 							b_ibl = true;
+							b_iblFirst = true;
 							m_iblPath = "../res/pic/IBL/Walk_Of_Fame/Mans_Outside_2k.hdr";
 						}
 						break;
 						case 2: 
 						{
+							b_iblFirst = true;
 							b_ibl = true;
 							m_iblPath = "../res/pic/IBL/PaperMill_Ruins_A/PaperMill_A_3k.hdr";
 						}
 						break;
 						case 3:
 						{
+							b_iblFirst = true;
 							b_ibl = true;
 							m_iblPath = "../res/pic/IBL/Arches_E_PineTree/Arches_E_PineTree_3k.hdr";
 						}
 						break;
 						case 4:
 						{
+							b_iblFirst = true;
 							b_ibl = true;
 							m_iblPath = "../res/pic/IBL/Newport_Loft/Newport_Loft_Ref.hdr";
 						}
@@ -425,7 +429,7 @@ void UI::ImguiCameraDlg()
 		ImGui::Begin("Camera", &b_showAppCamera, ImGuiWindowFlags_None);
 		ImGui::SetNextItemWidth(120);
 		ImGui::Text("Camera Position\n [%f \t %f \t %f]", m_camPos.x, m_camPos.y, m_camPos.z);
-		ImGui::Text("Camera Yaw\n [%f], Camera Pitch\n[%f]", m_camYaw, m_camPitch);
+		ImGui::Text("Camera Yaw [%f]\nCamera Pitch[%f]\n", m_camYaw, m_camPitch);
 		ImGui::Text("Camera WorldUp\n [%f \t %f \t %f]", m_camWorldup.x, m_camWorldup.y, m_camWorldup.z);
 		ImGui::SliderInt("Aperture", &m_camApterture, 1, 8);
 		switch (m_camApterture)
@@ -488,8 +492,11 @@ void UI::ImguiDisneyDlg()
 		ImGui::SetNextWindowPos(ImVec2(950, 245), ImGuiCond_FirstUseEver);
 		ImGui::Begin("Disney", &b_showAppDisney, ImGuiWindowFlags_None);
 		ImGui::SetNextItemWidth(120);
-		float v[3] = { m_disneyBaseColor.x, m_disneyBaseColor.y, m_disneyBaseColor.z };
-		ImGui::SliderFloat3("base color", v, 0.0, 1.0);
+		if (ImGui::Button("Change to current material type"))
+		{
+			m_matType = DISNEY;
+		}
+		ImGui::SliderFloat3("base color", m_disneyBaseColor, 0.0, 1.0);
 		
 		ImGui::SliderFloat("Subsurface", &m_disneySubsurface, 0.0, 1.0);
 		ImGui::SliderFloat("Metallic", &m_disneyMetallic, 0.0, 1.0);
