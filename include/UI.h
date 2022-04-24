@@ -22,10 +22,7 @@ public:
 		m_dirLColor = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
 		m_pointLColor = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
 		m_spotLColor = ImVec4(0.0f, 0.0f, 1.0f, 1.0f);
-		m_areaColr = ImVec4(0.0f, 1.0f, 1.0f, 1.0f);
-		m_radius = 0.2355;
-		m_rectWidth_Height[0] = 0.5;
-		m_rectWidth_Height[1] = 0.44;
+		m_areaLColor = ImVec4(0.0f, 1.0f, 1.0f, 1.0f);
 		m_iblPath = "../res/pic/IBL/Walk_Of_Fame/Mans_Outside_2k.hdr";
 	};
 	virtual ~UI() {};
@@ -114,12 +111,18 @@ public:
 	ImVec4 m_dirLColor;
 	ImVec4 m_pointLColor;
 	ImVec4 m_spotLColor;
-	ImVec4 m_areaColr;
-	float m_radius;
-	float m_rectWidth_Height[2];
+	
 	std::string m_iblPath;
 	bool b_ibl = false;
 	bool b_iblFirst = true;
+
+	ImVec4 m_areaLColor;
+	float m_areaLIntensity = 5.0f;
+	float m_areaLRoteateY = 0.0f;
+	float m_areaLRoteateZ = 0.0f;
+	float m_areaLWidth_Height[2] = {5.0f, 5.0f};
+	bool  b_areaLTwoside = false;
+
 	
 //** ------------
 //** model UI parameter

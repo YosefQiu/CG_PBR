@@ -163,7 +163,8 @@ int main(int argc, char* argv[])
 #pragma region loadmodel
 	string obj_filename = "../res/model/sphere.obj";
 	string obj_cloth_filename = "../res/model/cloth/cloth.obj";
-	mySphere = new Model(obj_filename);
+	string obj_mokey_filename = "../res/model/monkey/monkey.obj";
+	mySphere = new Model(obj_mokey_filename);
 	myClothes = new Model(obj_cloth_filename);
     myNoise = new Model(obj_filename); 
 	myDisney = new Model(obj_filename);
@@ -228,6 +229,8 @@ int main(int argc, char* argv[])
     ModelMatrix = glm::rotate(ModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	ProjMatrix = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
 
+
+	myScene->GetModel("Sphere")->SetModelScale(glm::vec3(8.0f, 8.0f, 8.0f));
 	myScene->GetModel("Clothes")->SetModelScale(glm::vec3(8.0f, 8.0f, 8.0f));
 	myScene->GetModel("Clothes")->SetModelTranslate(glm::vec3(0.0f, -0.25f, 0.0f));
 #pragma endregion modelmatrix
@@ -304,7 +307,7 @@ void RenderMain()
 
 		glm::mat4 rot = glm::mat4(1.0f);
 		rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		myScene->GetModel("Sphere")->SetMVP(rot * ModelMatrix, myCamera->GetViewMatrix(), ProjMatrix);
+		myScene->GetModel("Sphere")->SetMVP(rot * myScene->GetModel("Sphere")->GetModelMatrix(), myCamera->GetViewMatrix(), ProjMatrix);
 		myScene->GetModel("Sphere")->GetShader()->SetVec3("cameraPosition", myCamera->Position);
 		myScene->GetModel("Sphere")->SetImguiParameter(teapotshader, myUI.get());
 		myScene->GetModel("Sphere")->BindTexture();

@@ -324,15 +324,27 @@ void UI::ImguiLightDlg()
 			{
 				b_lam = !b_lam;
 			}
-			ImGui::Checkbox("AreaLight", &b_areaFlag); 
+			ImGui::SameLine();
+			if (ImGui::RadioButton("Two Side", b_areaLTwoside))
+			{
+				b_areaLTwoside = !b_areaLTwoside;
+			}
+			ImGui::SameLine();
+			if (ImGui::RadioButton("AreaLight", b_areaFlag))
+			{
+				b_areaFlag = !b_areaFlag;
+			}
 			static bool ref_color = false;
 			static ImVec4 ref_color_v(1.0f, 0.0f, 1.0f, 0.5f);
-			if(ImGui::ColorPicker4("MyColor##4", (float*)&m_areaColr, 
+			if(ImGui::ColorPicker4("MyColor##4", (float*)&m_areaLColor, 
 				ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_AlphaBar, 
 				ref_color ? &ref_color_v.x : NULL))
-				m_alclr = glm::vec3(m_areaColr.x, m_areaColr.y, m_areaColr.z);
-			ImGui::SliderFloat("Circle Radius", &m_radius, 0.0, 1.0);
-			ImGui::SliderFloat2("Width & Height", m_rectWidth_Height, 0.0, 1.0);
+				m_alclr = glm::vec3(m_areaLColor.x, m_areaLColor.y, m_areaLColor.z);
+			ImGui::SliderFloat2("Width & Height", m_areaLWidth_Height, 0.0f, 15.0f);
+			ImGui::SliderFloat("Intensity", &m_areaLIntensity, 0.0f, 10.0f);
+			ImGui::SliderFloat("RotateZ", &m_areaLRoteateZ, 0.0f, 1.0f);
+			ImGui::SliderFloat("RotateY", &m_areaLRoteateY, 0.0f, 1.0f);
+			
 			ImGui::TreePop();
 			ImGui::Separator();
 		}
