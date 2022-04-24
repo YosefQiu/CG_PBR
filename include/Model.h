@@ -40,6 +40,9 @@ public:
 	void SetMVP(Shader* shader, glm::mat4 M, glm::mat4 V, glm::mat4 P);
 	void SetMVP(glm::mat4 M, glm::mat4 V, glm::mat4 P);
 	void SetMVP();
+	void SetModelRotate(float angle, glm::vec3 dir);
+	void SetModelScale(glm::vec3 scale);
+	void SetModelTranslate(glm::vec3 dir);
 	void SetImguiParameter(Shader* shader, UI* myUI);
 	void SetImguiParameter(UI* myUI);
 	void SetTexture(std::string pathRoot);
@@ -49,6 +52,7 @@ public:
 	glm::vec3 GetCameraPos();
 	glm::vec3 GetCameraTarget();
 	glm::vec3 GetModelCenter();
+	glm::mat4 GetModelMatrix();
 	Shader* GetShader();
 private:
 	void LoadModel(std::string path);

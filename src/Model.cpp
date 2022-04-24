@@ -170,6 +170,11 @@ glm::vec3 Model::GetModelCenter()
 	return center;
 }
 
+glm::mat4 Model::GetModelMatrix()
+{
+	return m_ModelMatrix;
+}
+
 Shader* Model::GetShader()
 {
 	return m_shader;
@@ -452,6 +457,21 @@ void Model::SetMVP()
 	m_shader->SetMat4("M", m_ModelMatrix);
 	m_shader->SetMat4("V", m_ViewMatrix);
 	m_shader->SetMat4("P", m_ProjMatrix);
+}
+
+void Model::SetModelRotate(float angle, glm::vec3 dir)
+{
+	m_ModelMatrix = glm::rotate(m_ModelMatrix,glm::radians(angle), dir);
+}
+
+void Model::SetModelScale(glm::vec3 scale)
+{
+	m_ModelMatrix = glm::scale(m_ModelMatrix, scale);
+}
+
+void Model::SetModelTranslate(glm::vec3 dir)
+{
+	m_ModelMatrix = glm::translate(m_ModelMatrix, dir);
 }
 
 void Model::SetShader(const char* vertexPath, const char* fragmentPath, const char* geometryPath /*= NULL*/, const char* tessControlPath /*= NULL*/, const char* tessEvalPath /*= NULL*/)

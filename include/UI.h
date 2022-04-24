@@ -101,11 +101,11 @@ public:
 //** material UI parameter
 //** ------------
 	std::map<std::string, unsigned int> m_mapTexnameToTexid;
-	float m_matAlbedo[3] = {0.0f, 0.0f, 0.0f};
-	float m_matSheenColor[3] = { 0.0f, 0.0f, 0.0f };
-	float m_matMetallic = 0.5f;
-	float m_matRoughness = 0.5f;
-	float m_matAo = 0.5f;
+	float m_matAlbedo[3] = {0.369f, 0.262f, 1.0f};
+	float m_matSheenColor[3] = { 0.262f, 0.185f, 0.433f };
+	float m_matMetallic = 0.979f;
+	float m_matRoughness = 0.167f;
+	float m_matAo = 0.283f;
 	MaterialType m_matType = PICTURE;
 
 //** ------------

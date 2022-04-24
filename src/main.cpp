@@ -162,8 +162,9 @@ int main(int argc, char* argv[])
 	
 #pragma region loadmodel
 	string obj_filename = "../res/model/sphere.obj";
+	string obj_cloth_filename = "../res/model/cloth/cloth.obj";
 	mySphere = new Model(obj_filename);
-	myClothes = new Model(obj_filename);
+	myClothes = new Model(obj_cloth_filename);
     myNoise = new Model(obj_filename); 
 	myDisney = new Model(obj_filename);
 #pragma endregion loadmodel
@@ -226,6 +227,9 @@ int main(int argc, char* argv[])
 	ModelMatrix = glm::mat4(1.0f);
     ModelMatrix = glm::rotate(ModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	ProjMatrix = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
+
+	myScene->GetModel("Clothes")->SetModelScale(glm::vec3(8.0f, 8.0f, 8.0f));
+	myScene->GetModel("Clothes")->SetModelTranslate(glm::vec3(0.0f, -0.25f, 0.0f));
 #pragma endregion modelmatrix
 
 	backgroundShader->Use();
@@ -300,7 +304,7 @@ void RenderMain()
 
 		glm::mat4 rot = glm::mat4(1.0f);
 		rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		myScene->GetModel("Sphere")->SetMVP(rot * ModelMatrix, ViewMatrix, ProjMatrix);
+		myScene->GetModel("Sphere")->SetMVP(rot * ModelMatrix, myCamera->GetViewMatrix(), ProjMatrix);
 		myScene->GetModel("Sphere")->GetShader()->SetVec3("cameraPosition", myCamera->Position);
 		myScene->GetModel("Sphere")->SetImguiParameter(teapotshader, myUI.get());
 		myScene->GetModel("Sphere")->BindTexture();
@@ -326,10 +330,10 @@ void RenderMain()
 	{
 		glm::mat4 rot = glm::mat4(1.0f);
 		rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		myScene->GetModel("Clothes")->SetMVP(rot * ModelMatrix, ViewMatrix, ProjMatrix);
+		myScene->GetModel("Clothes")->SetMVP(rot * myScene->GetModel("Clothes")->GetModelMatrix(), myCamera->GetViewMatrix(), ProjMatrix);
 		myScene->GetModel("Clothes")->GetShader()->SetVec3("cameraPosition", myCamera->Position);
 		myScene->GetModel("Clothes")->SetImguiParameter(clothesshader, myUI.get());
-
+		myUI->m_heightFactor = 0.0f;
 		for (int i = 0; i < sizeof(lightPosition) / sizeof(lightPosition[0]); i++)
 		{
 			glm::vec3 newPos = lightPosition[i] + glm::vec3(sin(glfwGetTime() * 5.0f) * 5.0f, 0.0f, 0.0f);
@@ -343,7 +347,7 @@ void RenderMain()
     {
         glm::mat4 rot = glm::mat4(1.0f);
         rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        myScene->GetModel("Noise")->SetMVP(rot * ModelMatrix, ViewMatrix, ProjMatrix);
+        myScene->GetModel("Noise")->SetMVP(rot * ModelMatrix, myCamera->GetViewMatrix(), ProjMatrix);
         myScene->GetModel("Noise")->GetShader()->SetVec2("u_resolution", glm::vec2(1280.0f, 720.0f));
         myScene->GetModel("Noise")->GetShader()->SetFloat("u_time", (float)glfwGetTime());
         myScene->GetModel("Noise")->SetImguiParameter(noiseshader, myUI.get());
@@ -353,7 +357,7 @@ void RenderMain()
 	{
 		glm::mat4 rot = glm::mat4(1.0f);
 		rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		myScene->GetModel("Disney")->SetMVP(rot * ModelMatrix, ViewMatrix, ProjMatrix);
+		myScene->GetModel("Disney")->SetMVP(rot * ModelMatrix, myCamera->GetViewMatrix(), ProjMatrix);
 		myScene->GetModel("Disney")->GetShader()->SetVec3("cameraPosition", myCamera->Position);
 		myScene->GetModel("Disney")->SetImguiParameter(disneyshader, myUI.get());
 		myScene->GetModel("Disney")->GetShader()->Use();

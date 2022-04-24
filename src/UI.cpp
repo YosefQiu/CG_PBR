@@ -160,7 +160,7 @@ void UI::ImguiControlDlg()
 		}
 		ImGui::SliderFloat("InnerLevel", &m_innerLevel, 1.0, 64.0);
 		ImGui::SliderFloat("OuterLevel", &m_outerLevel, 1.0, 64.0);
-		ImGui::SliderFloat("Height factor", &m_heightFactor, 1.0, 2.0);
+		ImGui::SliderFloat("Height factor", &m_heightFactor, 0.0, 2.0);
 
 		ImGui::End();
 	}
