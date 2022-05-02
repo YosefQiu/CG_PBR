@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{31C07259-C616-307A-A2E0-70D7A9B5D5D7}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>Projectfinal</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\yongf\Desktop\CG_Final\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Projectfinal.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Projectfinal</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\yongf\Desktop\CG_Final\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Projectfinal.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Projectfinal</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\yongf\Desktop\CG_Final\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Projectfinal.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Projectfinal</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\yongf\Desktop\CG_Final\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Projectfinal.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Projectfinal</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>External\glfw\src\Debug\glfw3.lib;External\assimp\code\Debug\assimp-vc140-mt.lib;External\assimp\contrib\zlib\Debug\zlibstaticd.lib;External\assimp\contrib\irrXML\Debug\IrrXML.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/yongf/Desktop/CG_Final/build/Debug/Projectfinal.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/yongf/Desktop/CG_Final/build/Debug/Projectfinal.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>External\glfw\src\Release\glfw3.lib;External\assimp\code\Release\assimp-vc140-mt.lib;External\assimp\contrib\zlib\Release\zlibstatic.lib;External\assimp\contrib\irrXML\Release\IrrXML.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/yongf/Desktop/CG_Final/build/Release/Projectfinal.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/yongf/Desktop/CG_Final/build/Release/Projectfinal.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>External\glfw\src\MinSizeRel\glfw3.lib;External\assimp\code\MinSizeRel\assimp-vc140-mt.lib;External\assimp\contrib\zlib\MinSizeRel\zlibstatic.lib;External\assimp\contrib\irrXML\MinSizeRel\IrrXML.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/yongf/Desktop/CG_Final/build/MinSizeRel/Projectfinal.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/yongf/Desktop/CG_Final/build/MinSizeRel/Projectfinal.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\yongf\Desktop\CG_Final\External\glfw\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glad\include;C:\Users\yongf\Desktop\CG_Final\External\assimp\include;C:\Users\yongf\Desktop\CG_Final\External\GL\glm;C:\Users\yongf\Desktop\CG_Final\External\Imgui\include;C:\Users\yongf\Desktop\CG_Final\External\lodepng;C:\Users\yongf\Desktop\CG_Final\include;C:\Users\yongf\Desktop\CG_Final\External;C:\Users\yongf\Desktop\CG_Final\External\GL;C:\Users\yongf\Desktop\CG_Final\External\stb_image;C:\Users\yongf\Desktop\CG_Final\External\FileDialog;C:\Users\yongf\Desktop\CG_Final\External\FileDialog\dirent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>External\glfw\src\RelWithDebInfo\glfw3.lib;External\assimp\code\RelWithDebInfo\assimp-vc140-mt.lib;External\assimp\contrib\zlib\RelWithDebInfo\zlibstatic.lib;External\assimp\contrib\irrXML\RelWithDebInfo\IrrXML.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/yongf/Desktop/CG_Final/build/RelWithDebInfo/Projectfinal.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/yongf/Desktop/CG_Final/build/RelWithDebInfo/Projectfinal.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Camera.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\FrameBufferObject.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\IBL.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Light.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Mesh.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Model.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Scene.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Shader.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\UI.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Window.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\main.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_demo.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_draw.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_impl_glfw.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_tables.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_widgets.cpp" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Camera.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Config.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\FrameBufferObject.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\IBL.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Light.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Mesh.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Model.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Scene.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Shader.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\UI.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Window.h" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\ggl.h" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\FileDialog\ImGuiFileDialog.cpp" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\GL\glad\src\glad.c" />
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\lodepng\lodepng.cpp" />
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\External\stb_image\stb_image.h" />
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\Disney_frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\Disney_vert.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\arealight.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\brdf.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\brdf_frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\brdf_vert.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\cubemap_vert.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\equirectangular_to_cubemap_frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\equirectangular_to_cubemap_vert.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\frag2.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\frag3.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\irradiance_conv_frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\noise.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\prefilter_frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\skybox_frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\skybox_vert.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\tctl.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\teapot_shadow_mapping_frag.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\teapot_shadow_mapping_vert.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\teva.glsl">
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\vert.glsl">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\yongf\Desktop\CG_Final\build\External\assimp\contrib\irrXML\IrrXML.vcxproj">
+      <Project>{2C0FC3EB-E3E4-339A-8A20-DD21BE5A6607}</Project>
+      <Name>IrrXML</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\yongf\Desktop\CG_Final\build\External\assimp\code\assimp.vcxproj">
+      <Project>{AC529188-9CCF-3509-B2C1-7C40EA3A25C6}</Project>
+      <Name>assimp</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\yongf\Desktop\CG_Final\build\External\glfw\src\glfw.vcxproj">
+      <Project>{9EB6B3A8-302C-34F6-AEF0-A5E3F347384F}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\yongf\Desktop\CG_Final\build\External\assimp\contrib\zlib\zlibstatic.vcxproj">
+      <Project>{FDC3FD92-C6AA-3D6F-88AC-6A108A44CC30}</Project>
+      <Name>zlibstatic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

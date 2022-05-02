@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\yongf\Desktop\CG_Final\build\CMakeFiles\c6f8b891838b1897e1e4c9e62e5235a4\uninstall.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\build\External\assimp\CMakeFiles\uninstall" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EE29168F-A530-354D-89D9-0EE841B3EC25}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

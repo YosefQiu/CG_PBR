@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Camera.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\FrameBufferObject.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\IBL.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Light.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Mesh.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Model.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Scene.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Shader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\UI.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\Window.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\src\main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_demo.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_impl_glfw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_impl_opengl3.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_tables.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\Imgui\src\imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\FileDialog\ImGuiFileDialog.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\GL\glad\src\glad.c">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yongf\Desktop\CG_Final\External\lodepng\lodepng.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Camera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Config.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\FrameBufferObject.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\IBL.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Light.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Mesh.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Model.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Scene.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Shader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\UI.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\Window.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\include\ggl.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yongf\Desktop\CG_Final\External\stb_image\stb_image.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\Disney_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\Disney_vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\arealight.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\brdf.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\brdf_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\brdf_vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\cubemap_vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\equirectangular_to_cubemap_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\equirectangular_to_cubemap_vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\frag2.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\frag3.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\irradiance_conv_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\noise.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\prefilter_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\skybox_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\skybox_vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\tctl.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\teapot_shadow_mapping_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\teapot_shadow_mapping_vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\teva.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="C:\Users\yongf\Desktop\CG_Final\res\shader\vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Externals">
+      <UniqueIdentifier>{19AB5370-5D1E-3031-8761-A6CEED157A94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{4204FBB3-D575-33DB-9CFF-2302B5D24A71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{79220A83-CBD6-3038-95AF-A64A1952017B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{CD999F28-C42C-3B72-8C3F-31B5645E4383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{2C770A03-3A64-3D49-B861-12079F27DF80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

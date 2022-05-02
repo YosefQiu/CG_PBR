@@ -30,6 +30,8 @@ Shader* clothesshader		 = NULL;
 Shader* noiseshader          = NULL;
 Shader* disneyshader = NULL;
 
+Shader* depthshader = NULL;
+
 Shader* equirectangularToCubemapShader = NULL;
 Shader* irradianceShader = NULL;
 Shader* backgroundShader = NULL;
@@ -40,7 +42,7 @@ IBL* myIbl = NULL;
 
 Scene*	myScene				 = NULL;
 
-
+FrameBufferObject* myFBO = NULL;
 
 
 void RenderMain();
@@ -64,7 +66,7 @@ glm::vec3 lightPosition1[] =
 
 glm::vec3 lightColor[] =
 {
-	glm::vec3(300.0f, 300.0f, 300.0f),
+	glm::vec3(150.0f, 150.0f, 150.0f),
 };
 
 #pragma region interactive
@@ -164,7 +166,9 @@ int main(int argc, char* argv[])
 	string obj_filename = "../res/model/sphere.obj";
 	string obj_cloth_filename = "../res/model/cloth/cloth.obj";
 	string obj_mokey_filename = "../res/model/monkey/monkey.obj";
-	mySphere = new Model(obj_mokey_filename);
+	string obj_matspher_filename = "../res/model/mat_sphere/material_sphere.obj";
+	string ob_torus_filename = "../res/model/torus/torus.obj";
+	mySphere = new Model(obj_matspher_filename);
 	myClothes = new Model(obj_cloth_filename);
     myNoise = new Model(obj_filename); 
 	myDisney = new Model(obj_filename);
@@ -210,6 +214,8 @@ int main(int argc, char* argv[])
 	teapotshader->SetInt("irradianceMap", 6);
 	teapotshader->SetInt("prefilterMap", 7);
 	teapotshader->SetInt("brdfLUT", 8);
+	teapotshader->SetInt("brdfLUT", 8);
+
 
 	myIbl->GetShader("backgroundShader")->Use();
 	myIbl->GetShader("backgroundShader")->SetInt("environmentMap", 0);
@@ -226,11 +232,11 @@ int main(int argc, char* argv[])
 	// Calc the MVP matrix
 	ViewMatrix = myCamera->GetViewMatrix();
 	ModelMatrix = glm::mat4(1.0f);
-    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    ModelMatrix = glm::rotate(ModelMatrix, glm::radians(45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	ProjMatrix = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
 
 
-	myScene->GetModel("Sphere")->SetModelScale(glm::vec3(8.0f, 8.0f, 8.0f));
+	//myScene->GetModel("Sphere")->SetModelRotate(glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	myScene->GetModel("Clothes")->SetModelScale(glm::vec3(8.0f, 8.0f, 8.0f));
 	myScene->GetModel("Clothes")->SetModelTranslate(glm::vec3(0.0f, -0.25f, 0.0f));
 #pragma endregion modelmatrix
@@ -260,8 +266,6 @@ int main(int argc, char* argv[])
 			//glBindTexture(GL_TEXTURE_2D, irradianceMap);
 			myIbl->RenderCube();
 		}
-		
-
 		// find imgui api
 		//ImGui::ShowDemoWindow();
 
@@ -307,7 +311,7 @@ void RenderMain()
 
 		glm::mat4 rot = glm::mat4(1.0f);
 		rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		myScene->GetModel("Sphere")->SetMVP(rot * myScene->GetModel("Sphere")->GetModelMatrix(), myCamera->GetViewMatrix(), ProjMatrix);
+		myScene->GetModel("Sphere")->SetMVP(rot * ModelMatrix, myCamera->GetViewMatrix(), ProjMatrix);
 		myScene->GetModel("Sphere")->GetShader()->SetVec3("cameraPosition", myCamera->Position);
 		myScene->GetModel("Sphere")->SetImguiParameter(teapotshader, myUI.get());
 		myScene->GetModel("Sphere")->BindTexture();
@@ -319,6 +323,7 @@ void RenderMain()
 		glBindTexture(GL_TEXTURE_CUBE_MAP, myIbl->m_prefilterMap);
 		glActiveTexture(GL_TEXTURE8);
 		glBindTexture(GL_TEXTURE_2D, myIbl->m_brdfLUTTexture);
+
 
 		for (int i = 0; i < sizeof(lightPosition) / sizeof(lightPosition[0]); i++)
 		{
@@ -350,10 +355,11 @@ void RenderMain()
     {
         glm::mat4 rot = glm::mat4(1.0f);
         rot = glm::rotate(glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        myScene->GetModel("Noise")->SetMVP(rot * ModelMatrix, myCamera->GetViewMatrix(), ProjMatrix);
+        myScene->GetModel("Noise")->SetMVP(rot * myScene->GetModel("Noise")->GetModelMatrix(), myCamera->GetViewMatrix(), ProjMatrix);
         myScene->GetModel("Noise")->GetShader()->SetVec2("u_resolution", glm::vec2(1280.0f, 720.0f));
         myScene->GetModel("Noise")->GetShader()->SetFloat("u_time", (float)glfwGetTime());
         myScene->GetModel("Noise")->SetImguiParameter(noiseshader, myUI.get());
+		myScene->GetModel("Noise")->GetShader()->SetBool("b_tex", !myUI->b_matTex);
         myScene->DrawScene("Noise", false, false);
     }
 	if (myUI->m_matType == DISNEY)

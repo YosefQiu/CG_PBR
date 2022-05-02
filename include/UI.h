@@ -103,6 +103,7 @@ public:
 	float m_matMetallic = 0.979f;
 	float m_matRoughness = 0.167f;
 	float m_matAo = 0.283f;
+	bool b_matTex = true;
 	MaterialType m_matType = PICTURE;
 
 //** ------------
@@ -122,6 +123,11 @@ public:
 	float m_areaLRoteateZ = 0.0f;
 	float m_areaLWidth_Height[2] = {5.0f, 5.0f};
 	bool  b_areaLTwoside = false;
+
+	int m_volbootom = -10;
+	int m_voltop = 10;
+	int m_volwidth = 4;
+
 
 	
 //** ------------

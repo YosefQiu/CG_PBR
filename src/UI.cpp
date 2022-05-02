@@ -283,6 +283,17 @@ void UI::ImguiMaterialDlg()
 			{
 				m_matType = CODE;
 			}
+
+			static int style_idx = 0;
+			const char* label = "Noise type";
+			if (ImGui::Combo(label, &style_idx, "Cloud\0lightning\0"))
+			{
+				switch (style_idx)
+				{
+				case 0: b_matTex = true; break;
+				case 1: b_matTex = false; break;
+				}
+			}
 			ImGui::TreePop();
 			ImGui::Separator();
 		}
@@ -368,7 +379,9 @@ void UI::ImguiLightDlg()
 		{
 			if (ImGui::TreeNode("Environment map..."))
 			{
-				
+				ImGui::SliderInt("Bottom", &m_volbootom, -10, 30);
+				ImGui::SliderInt("Top", &m_voltop,-10, 30);
+				ImGui::SliderInt("Width", &m_volwidth, -10, 30);
 
 				ImGui::TreePop();
 				ImGui::Separator();

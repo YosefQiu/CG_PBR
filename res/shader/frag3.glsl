@@ -1,7 +1,7 @@
 #version 330 core
 
 in vec2 teTexCoord;
-in vec3 teWorldPos;
+in vec3 teWorldPos; 
 in vec3 teNormal;
 
 //lights
@@ -27,6 +27,9 @@ uniform samplerCube irradianceMap;
 uniform samplerCube prefilterMap;
 uniform sampler2D brdfLUT;
 uniform bool b_ibl;
+
+
+
 
 out vec4 FragColor;
 
@@ -247,6 +250,7 @@ vec3 getNormalFromNormalMap()
     return normalize(TBN * tangentNormal);
 }
 
+
 void main()
 {
     float ev100 = exposureSettings(aperture, shutterSpeed, sensitivity);
@@ -267,6 +271,7 @@ void main()
     
 
     vec3 Lo = vec3(0.0f, 0.0f, 0.0f);
+    
     for (int i = 0; i < 4; i++)
     {
         vec3 L = normalize(lightPosition[i] - teWorldPos);
@@ -288,6 +293,9 @@ void main()
         vec3 Kd = Diffuse_BRDF(diffuseColor,  NoV, NoL, LoH, roughness);
 
         Lo += (Kd + Ks) * radiance * NoL;
+
+        
+        
     }
     
     vec3 kS = F_Schlick(max(dot(N, V), 0.0f), F0);
@@ -303,8 +311,6 @@ void main()
         vec3 prefilteredColor = texture(prefilterMap, R, roughness * MAX_REFLECTION_LOD).rgb;
         vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
         vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
-
-
         ambient = (kD * diffuse + specular) * ao;
     }
     else
@@ -325,6 +331,7 @@ void main()
     color = pow(color, vec3(1.0f / 2.2f));
 
     color *= exposure;
+
 
     FragColor = vec4(color, 1.0f);
     

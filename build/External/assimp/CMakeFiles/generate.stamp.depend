@@ -1,0 +1,19 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.22/Modules/CheckFunctionExists.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/CheckTypeSize.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/FindPkgConfig.cmake
+C:/Users/yongf/Desktop/CG_Final/External/assimp/CMakeLists.txt
+C:/Users/yongf/Desktop/CG_Final/External/assimp/assimp-config-version.cmake.in
+C:/Users/yongf/Desktop/CG_Final/External/assimp/assimp-config.cmake.in
+C:/Users/yongf/Desktop/CG_Final/External/assimp/assimp.pc.in
+C:/Users/yongf/Desktop/CG_Final/External/assimp/cmake-modules/FindDirectX.cmake
+C:/Users/yongf/Desktop/CG_Final/External/assimp/cmake-modules/FindPkgMacros.cmake
+C:/Users/yongf/Desktop/CG_Final/External/assimp/cmake-modules/FindZLIB.cmake
+C:/Users/yongf/Desktop/CG_Final/External/assimp/cmake-modules/PrecompiledHeader.cmake
+C:/Users/yongf/Desktop/CG_Final/External/assimp/cmake-modules/cmake_uninstall.cmake.in
+C:/Users/yongf/Desktop/CG_Final/External/assimp/include/assimp/config.h.in
+C:/Users/yongf/Desktop/CG_Final/External/assimp/revision.h.in

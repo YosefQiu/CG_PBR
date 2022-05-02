@@ -12,9 +12,13 @@ uniform mat4 M;
 uniform mat4 V;
 uniform mat4 P;
 
+
 out vec2 teTexCoord;
 out vec3 teWorldPos;
 out vec3 teNormal;
+
+
+
 
 
 
@@ -40,9 +44,10 @@ void main()
 
     p += vec4((1.0f) * normal * (height * fact), 1.0f);
     
-
     gl_Position = P * V * M * p;   
     teTexCoord = texCoord;
     teNormal = mat3(M) * normal;
     teWorldPos = vec3(M * p);
+
+
 }
