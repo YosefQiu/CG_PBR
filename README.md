@@ -1,16 +1,9 @@
 
-
 ## <center>CS 6610 Interactive Comp Graph</center>
 
 -----
 ### Final Project PBR
-### Name: Yongfeng Qiu&emsp;UID:  u1363271
-
---------
-
-**I also provided a .md file is in .Zip file, if you can, please see .md file since it has the best layout.**
-
------
+### Name: Yongfeng Qiu & Zhongyi Jiang  
 
 
 ### Operating environment
@@ -23,7 +16,7 @@
 - **ImGui** (ImGui is a bloat-free graphical user interface library for C++.)
 - **GLM** (OpenGL Mathematics (GLM) is a header-only C++ mathematics library for graphics software based on the OpenGL Shading Language (GLSL) specifications.
 - **stb_image** (Decoding different type images like JPG, PNG)
-- **ASSIMP**
+- **ASSIMP** (A library to import and export various 3d-model-formats including scene-post-processing to generate missing render data.)
 
 ### Compiling environment
 - CMake   
@@ -111,45 +104,44 @@ Here are my result. I also submitted a video showing how I compiled and ran on W
 
 - Image Texture(AlbedoMap, NormalMap, RoughnessMap, DisplacementMap, AoMap, MetallicMap) 
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/PBR2.PNG)
+![img](result/PBR22.PNG)
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/PBR3.PNG)
+![img](result/PBR3.PNG)
 
 - Solid Texture(Albedo, SheenColor, Metallic, Roughness, Ao)
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/cloth1.png)
+![img](result/cloth1.png)
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/cloth2.png)
+![img](result/cloth2.png)
 
 - Procedural Texture
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/noise2.PNG)
+![img](result/noise2.PNG)
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/noise1.png)
+![img](result/noise1.png)
 
 **Physicall based camera**
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/042611404896_0camera1.PNG)
+![img](result/phy_camera.PNG)
 
 **Light**
-
 - Theory Light
 
-![image](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/PBR4.PNG)
+![image](result/PBR4.PNG)
 
 - Image base light
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/ibl2.png)
+![img](result/ibl2.png)
 
 - Area light
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/截屏2022-04-25 22.01.01.png)
+![img](result/Arealight.png)
 
 
 
 **Disney principle**
 
-![img](https://cdn.jsdelivr.net/gh/YosefQiu/image@master/uPic/dis2.PNG)
+![img](result/dis2.PNG)
 
 
 
@@ -157,6 +149,7 @@ Here are my result. I also submitted a video showing how I compiled and ran on W
 
 **References**
 
-[1] Burley B, Studios W D A. Physically-based shading at disney[C]//ACM SIGGRAPH. 2012
-
-[2] Pharr M, Jakob W, Humphreys G. Physically based rendering: From theory to implementa- tion[M]. Morgan Kaufmann, 2016.
+[1] Burley B, Studios W D A. Physically-based shading at disney[C]//ACM SIGGRAPH. 2012   
+[2] Pharr M, Jakob W, Humphreys G. Physically based rendering: From theory to implementa- tion[M]. Morgan Kaufmann, 2016.   
+=======
+# Physics based animation implemented
