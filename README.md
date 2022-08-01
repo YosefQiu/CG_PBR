@@ -148,8 +148,5 @@ Here are my result. I also submitted a video showing how I compiled and ran on W
 
 
 **References**
-
 [1] Burley B, Studios W D A. Physically-based shading at disney[C]//ACM SIGGRAPH. 2012   
 [2] Pharr M, Jakob W, Humphreys G. Physically based rendering: From theory to implementa- tion[M]. Morgan Kaufmann, 2016.   
-=======
-# Physics based animation implemented
